@@ -63,6 +63,15 @@ static NSString *typeMatch(NSString *type, NSString *pattern){
         return NSStringFromRange(*(NSRange *)valueRef);
     }
     
+    // CoreMedia
+    if (strcmp(@encode(CMTime), type) == 0){
+        return CFBridgingRelease(CMTimeCopyDescription(NULL, (*(CMTime *)valueRef)));
+    }
+    
+    if (strcmp(@encode(CMTimeRange), type) == 0){
+        return CFBridgingRelease(CMTimeRangeCopyDescription(NULL, (*(CMTimeRange *)valueRef)));
+    }
+    
     // CoreGraphics
     if (strcmp(@encode(CGRect), type) == 0){
         return NSStringFromCGRect(*(CGRect *)valueRef);
